@@ -26,11 +26,10 @@ jobs:
 
       - name: Verify database creation
         run: |
-          ls -la
-          find . -name "*.db"
+          ls -la database
 
       - name: Upload SQLite database
         uses: actions/upload-artifact@v4
         with:
           name: earthquake-sqlite-database
-          path: "*.db"
+          path: database/earthquake.db

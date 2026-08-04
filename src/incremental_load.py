@@ -258,3 +258,5 @@ def run_incremental_pipeline(reference_date):
 
     # Load Completion Notification
     print("[PIPELINE] Incremental load completed")
+
+run_incremental_pipeline(datetime.today())

@@ -8,6 +8,9 @@ on:
 
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   run-etl:
     runs-on: ubuntu-latest
@@ -28,3 +31,15 @@ jobs:
       - name: Run incremental ETL pipeline
         run: |
           python src/incremental_load.py
+
+      - name: Verify database update
+        run: |
+          ls -lh database/earthquake.db
+
+      - name: Commit updated database
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add database/earthquake.db
+          git commit -m "Update earthquake database incrementally" || echo "No changes"
+          git push

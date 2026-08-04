@@ -3,6 +3,9 @@ name: Historical Earthquake Data Load
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   historical-load:
     runs-on: ubuntu-latest
@@ -28,8 +31,10 @@ jobs:
         run: |
           ls -la database
 
-      - name: Upload SQLite database
-        uses: actions/upload-artifact@v4
-        with:
-          name: earthquake-sqlite-database
-          path: database/earthquake.db
+      - name: Commit database to repository
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add database/earthquake.db
+          git commit -m "Add historical earthquake database" || echo "No changes to commit"
+          git push

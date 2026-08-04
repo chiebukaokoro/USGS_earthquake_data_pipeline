@@ -249,7 +249,7 @@ transformed_earthquake_df.tail()
 """
 
 # Install SQLAlchemy
-!pip install sqlalchemy
+#!pip install sqlalchemy
 
 # Import SQLAlchemy functions for creating a database connection and executing SQL queries
 from sqlalchemy import create_engine, text

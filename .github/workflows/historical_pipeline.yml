@@ -23,3 +23,14 @@ jobs:
       - name: Run historical load
         run: |
           python src/historical_load.py
+
+      - name: Verify database creation
+        run: |
+          ls -la
+          find . -name "*.db"
+
+      - name: Upload SQLite database
+        uses: actions/upload-artifact@v4
+        with:
+          name: earthquake-sqlite-database
+          path: "*.db"

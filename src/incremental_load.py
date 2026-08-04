@@ -73,7 +73,7 @@ def transform_earthquake_data(df):
   geometry_df = pd.json_normalize(df["geometry"])
 
   # Combine both dataframes
-  earthquake_df = pd.concat([properties_df, geometry_df], axis=1)
+  earthquake_df = pd.concat([df[["id"]], properties_df, geometry_df], axis=1)
 
   # Unpack the cordinates list into 3 columns
   earthquake_df[["longitude", "latitude", "depth"]] = earthquake_df['coordinates'].apply(pd.Series)
